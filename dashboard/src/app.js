@@ -2,7 +2,7 @@ var angular = require('angular');
 var firebase = require('client-firebase');
 var angularfire = require('angularfire-browserify');
 
-var app = angular.module('app', ['firebase','ngAnimate'])
+var app = angular.module('app', ['firebase','ngAnimate']);
 
 function MyController($scope, $firebase) {
 var ref = new Firebase("https://lksg2hcetqi.firebaseio-demo.com/");
@@ -15,4 +15,3 @@ $scope.addMessage = function(e) {
 }
 
 console.log('hello');
-
