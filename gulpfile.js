@@ -10,7 +10,7 @@ var prefix = require('gulp-autoprefixer');
 
 var handleErrors = function (error) {
  	return 'Error on line' + error.line + ' :' + error.message;
-}
+};
 
 gulp.task('scripts', function() {
   browserify('./dashboard/src/app.js')
@@ -18,7 +18,6 @@ gulp.task('scripts', function() {
   .on('error', notify.onError(handleErrors))
   .pipe(source('bundle.js'))
   .pipe(gulp.dest('./dashboard/build/'));
-
 });
 
 gulp.task('less', function() {
@@ -41,13 +40,12 @@ gulp.task('jade', function() {
     .pipe(jade())
     .on('error', notify.onError(handleErrors))
     .pipe(gulp.dest('./dashboard/build/templates/'));
-
 });
-
-gulp.task('default', ['scripts', 'less', 'jade', 'watch']);
 
 gulp.task('watch', function() {
   gulp.watch('./dashboard/**/*.js', ['scripts']);
   gulp.watch('./dashboard/**/*.jade', ['jade']);
   gulp.watch('./dashboard/**/*.less', ['less']);
 });
+
+gulp.task('default', ['scripts', 'less', 'jade', 'watch']);
