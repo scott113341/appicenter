@@ -4,7 +4,5 @@ var angularfire = require('angularfire-browserify');
 
 var app = angular.module('app', ['firebase','ngAnimate'])
 
-
-
 console.log('hello');
 
