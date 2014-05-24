@@ -37,7 +37,7 @@ gulp.task('jade', function() {
 		.pipe(rename('index.html'))
 		.pipe(gulp.dest('./dashboard/build/'));
 
-  gulp.src('./src/newtab/templates/*.jade')
+  gulp.src('./dashboard/src/templates/*.jade')
     .pipe(jade())
     .on('error', notify.onError(handleErrors))
     .pipe(gulp.dest('./dashboard/build/templates/'));
@@ -47,7 +47,7 @@ gulp.task('jade', function() {
 gulp.task('default', ['scripts', 'less', 'jade', 'watch']);
 
 gulp.task('watch', function() {
-  gulp.watch('./src/**/*.js', ['scripts']);
-  gulp.watch('./src/**/*.jade', ['jade']);
-  gulp.watch('./src/**/*.less', ['less']);
+  gulp.watch('./dashboard/**/*.js', ['scripts']);
+  gulp.watch('./dashboard/**/*.jade', ['jade']);
+  gulp.watch('./dashboard/**/*.less', ['less']);
 });
