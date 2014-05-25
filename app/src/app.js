@@ -10,6 +10,14 @@ appicenter.config(['$routeProvider', function($routeProvider) {
       templateUrl: 'templates/login.html',
       controller: 'LoginCtrl'
     })
+    .when('/logout', {
+      templateUrl: 'templates/logout.html',
+      controller: 'LogoutCtrl'
+    })
+    .when('/auction', {
+      templateUrl: 'templates/auction.html',
+      controller: 'AuctionCtrl'
+    })
 
 
     .when('/admin/scoreboard', {
