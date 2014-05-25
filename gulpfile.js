@@ -54,6 +54,9 @@ gulp.task('jade', function() {
     .pipe(jade())
     .on('error', notify.onError(handleErrors))
     .pipe(gulp.dest('./app/build/templates/'));
+
+  gulp.src('./bower_components/bootstrap/dist/fonts/**.*')
+    .pipe(gulp.dest('./app/build/fonts/'));
 });
 
 gulp.task('watch', function() {
