@@ -10,3 +10,5 @@ div.container-fluid
 
       div(ng-if="scoreboard.current_view.id == 'instagram'")
         h1 Instagram
+        p CurrentPhoto: {{scoreboard.current_photo}}
+        img(src="{{scoreboard.current_photo}}")

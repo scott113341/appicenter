@@ -1,4 +1,4 @@
-var appicenter = angular.module('appicenter', ['firebase', 'ngRoute']);
+var appicenter = angular.module('appicenter', ['firebase', 'ngRoute','mgcrea.ngStrap']);
 
 appicenter.config(['$routeProvider', function($routeProvider) {
   $routeProvider
