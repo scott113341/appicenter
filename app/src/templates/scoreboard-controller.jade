@@ -18,7 +18,7 @@ div.container-fluid
 
   div.row
     div.col-lg-12
-      div.panel.panel-default
+      div.panel.panel-info
         div.panel-heading Auction Settings
         div.panel-body
           table.table.table-hover
@@ -57,24 +57,28 @@ div.container-fluid
 
   div.row
     div.col-lg-12
-      div.media
-        div.pull-left
-          img.media-object(ng-src="{{current_photo.images.low_resolution.url}}")
-        div.media-body
-          h2 Current Image
-          p {{current_photo.caption.from.username}}
-          p {{current_photo.caption.text}}
-          p(am-time-ago="current_photo.caption.created_time" am-preprocess="unix")
+      div.panel.panel-warning
+        div.panel-heading Instagram Settings
+        div.panel-body
+          div.media
+            div.pull-left
+              img.media-object(ng-src="{{current_photo.images.low_resolution.url}}")
+            div.media-body
+              h2 Current Image
+              p {{current_photo.caption.from.username}}
+              p {{current_photo.caption.text}}
+              p(am-time-ago="current_photo.caption.created_time" am-preprocess="unix")
 
-      div.row
-        h2 Instagram Feed
-        div.row.feed
-          div.item(ng-repeat="(key,media) in photos | orderBy:key",ng-class="{selected:$parent.current_photo.id == media.id}")
-            p: img(ng-src="{{media.images.thumbnail.url}}")
-            div
-              p {{media.caption.text}}
-              p {{media.caption.from.username}}
-              button.btn.btn-default.btn(ng-click="$parent.current_photo = media",ng-show="$parent.current_photo.id != media.id")
-                span.glyphicon.glyphicon-star
-                |&nbsp;Set Image
-                
+          h2 Instagram Feed
+          div.row.feed
+            div.item(ng-repeat="(key,media) in photos | orderBy:key",ng-class="{selected:$parent.current_photo.id == media.id}")
+              p: img(ng-src="{{media.images.thumbnail.url}}")
+              div
+                p {{media.caption.text}}
+                p {{media.caption.from.username}}
+                button.btn.btn-default.btn(ng-click="$parent.current_photo = media", ng-show="$parent.current_photo.id != media.id")
+                  span.glyphicon.glyphicon-star
+                  |&nbsp;Set Image
+                button.btn.btn-success.btn(ng-show="$parent.current_photo.id == media.id")
+                  span.glyphicon.glyphicon-ok-sign
+                  |&nbsp;Current Image
