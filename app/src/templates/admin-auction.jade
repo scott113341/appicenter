@@ -1,0 +1,60 @@
+include partials/admin-navigation
+
+div.container-fluid
+  div.row
+    div.col-lg-12
+      h1 Auctions
+
+      div.panel.panel-success
+        div.panel-heading New Auction
+        div.panel-body
+          form.form-horizontal(ng-submit="createAuction()")
+            .form-group
+              label.col-sm-2.control-label(for='name') Name
+              .col-sm-10
+                input#name.form-control(type='text', placeholder='Item name', ng-model='new_auction.name')
+            .form-group
+              label.col-sm-2.control-label(for='image') Image URL
+              .col-sm-10
+                input#image.form-control(type='text', placeholder='Image URL', ng-model='new_auction.image')
+            .form-group
+              label.col-sm-2.control-label(for='duration') Duration (minutes)
+              .col-sm-10
+                input#duration.form-control(type='number', placeholder='Duration (minutes)', ng-model='new_auction.duration')
+            .form-group
+              label.col-sm-2.control-label(for='start_price') Starting price
+              .col-sm-10
+                input#start_price.form-control(type='number', placeholder='Starting price', ng-model='new_auction.start_price')
+            .form-group
+              .col-sm-offset-2.col-sm-10
+                button.btn.btn-success(type='submit') Create
+
+
+
+      table.table.table-hover
+        thead
+          th Id
+          th Item
+          th Image
+          th In Progress?
+          th Start Time
+          th End Time
+          th Starting Price
+          th Current Price
+          th Highest Bidder
+          th Actions
+
+        tbody
+          tr(ng-repeat="auction in auctions | orderByPriority", ng-class="{success: inProgress(auction)}")
+            td {{auction.$id}}
+            td {{auction.name}}
+            td
+              img(ng-src="{{auction.image}}", width="20px", height="20px")
+            td {{inProgress(auction) | boolean}}
+            td {{auction.start_time | asDate | date:'medium'}}
+            td {{auction.end_time | asDate | date:'medium'}}
+            td ${{auction.start_price}}
+            td ${{auction.current_price}}
+            td {{auction.highest_bidder}}
+            td
+              button.btn.btn-success.btn-xs(ng-click="startAuction(auction)") Start

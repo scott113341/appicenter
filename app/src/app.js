@@ -20,6 +20,10 @@ appicenter.config(['$routeProvider', function($routeProvider) {
     })
 
 
+    .when('/admin', {
+      templateUrl: 'templates/admin.html',
+      controller: 'AdminCtrl'
+    })
     .when('/admin/scoreboard', {
       templateUrl: 'templates/scoreboard.html',
       controller: 'ScoreboardCtrl'
@@ -27,6 +31,10 @@ appicenter.config(['$routeProvider', function($routeProvider) {
     .when('/admin/scoreboard-controller', {
       templateUrl: 'templates/scoreboard-controller.html',
       controller: 'ScoreboardControllerCtrl'
+    })
+    .when('/admin/auctions', {
+      templateUrl: 'templates/admin-auction.html',
+      controller: 'AuctionAdminCtrl'
     })
 
 
