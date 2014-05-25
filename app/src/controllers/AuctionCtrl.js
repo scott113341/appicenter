@@ -9,13 +9,18 @@ appicenter.controller('AuctionCtrl', ['$scope', '$location', '$timeout', 'fireba
   });
 
 
+  // get the current auction's id from the scoreboard
+  var currentAuctionRef = firebaseService('/scoreboard/current_auction');
+  currentAuctionRef.$bind($scope, 'currentAuction').then(function() {
 
-  var auctionsRef = firebaseService('/auctions');
-  auctionsRef.$bind($scope, 'auctions').then(function() {
-    $scope.auction = $scope.auctions['-JNm_v_JD9F7gsFpuDvO'];
-    $scope.updateProgress();
+    // get the current auction
+    var auctionsRef = firebaseService('/auctions');
+    var auctionRef = auctionsRef.$child($scope.currentAuction);
+
+    auctionRef.$bind($scope, 'auction').then(function() {
+      $scope.updateProgress();
+    });
   });
-
 
 
   $scope.updateProgress = function() {
@@ -27,6 +32,7 @@ appicenter.controller('AuctionCtrl', ['$scope', '$location', '$timeout', 'fireba
       percent: percent.toFixed(2) + '%',
       time_remaining: Math.floor(time_remaining)
     };
+    $scope.finished = time_remaining <= 0;
 
     $timeout(function() {
       $scope.updateProgress();

@@ -3,41 +3,33 @@ include partials/admin-navigation
 div.container-fluid
   div.row
     div.col-lg-12
-      h1 Scoreboard Controller
+      h1 Scoreboard Control
 
-      button.btn.btn-primary(ng-click="show_preview = !show_preview") Preview output
-      iframe(src="/#/admin/scoreboard", width="600px", height="400px")
+      //button.btn.btn-primary(ng-click="show_preview = !show_preview") Preview output
+      //iframe(src="/#/admin/scoreboard", width="600px", height="400px")
 
-
-      h2 Currently displaying: <span>{{current_view.name}}</span>
-
-
-
-
-
-      div.btn-group
-        button.btn.btn-default.dropdown-toggle(type="button", data-toggle="dropdown") Action <span class="caret"></span>
-        ul.dropdown-menu
-          li
-            a Auction
-          li
-            a Instagram
+      h3 Currently displaying:&nbsp;
+        div.btn-group
+          button.btn.btn-primary.dropdown-toggle(type="button", data-toggle="dropdown") {{current_view.name}} <span class="caret"></span>
+          ul.dropdown-menu
+            li(ng-repeat="view in views", ng-click="$parent.current_view=view", ng-class="{active:$parent.current_view.id==view.id}")
+              a {{view.name}}
 
 
   div.row
     div.col-lg-12
-      h1 Auction Config
-      table.table.
-        thead
+      div.panel.panel-default
+        div.panel-heading Auction Settings
+        div.panel-body
+          p meow
 
 
 
 
 
-      div.btn-group
-        label.btn.btn-default(ng-repeat="view in views",ng-click="$parent.current_view=view",ng-class="{active:$parent.current_view.id==view.id}") {{view.name}}
 
-      
+  div.row
+    div.col-lg-12
       div.media
         div.pull-left
           img.media-object(src="{{current_photo.images.low_resolution.url}}")
@@ -46,7 +38,7 @@ div.container-fluid
           p {{current_photo.caption.from.username}}
           p {{current_photo.caption.text}}
           p(am-time-ago="current_photo.caption.created_time" am-preprocess="unix")
-          
+
       div.row
         h2 Instagram Feed
         div.row.feed
