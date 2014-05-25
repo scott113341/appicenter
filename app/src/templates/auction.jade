@@ -12,7 +12,7 @@ div.container-fluid
       img(ng-src="{{auction.image}}", style="max-width:100%;")
     div.col-xs-6
       div(ng-if="status == 0")
-        h3 ${{auction.current_price}} <small>starting bid</small>
+        h3 ${{auction.start_price}} <small>starting bid</small>
       div(ng-if="status == 1")
         h3 ${{auction.current_price}} <small>current bid</small>
         button.btn.btn-success(ng-click="bid(auction.current_price+1)") Bid ${{auction.current_price + 1}}
