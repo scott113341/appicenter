@@ -43379,19 +43379,6 @@ appicenter.factory('loginService', ['$firebaseSimpleLogin', function($firebaseSi
   return $firebaseSimpleLogin(ref);
 }]);
 
-appicenter.filter("asDate", function() {
-  return function(input) {
-    return new Date(input);
-  }
-});
-
-appicenter.filter("boolean", function() {
-  return function(input) {
-    if (input === true) return 'Yes';
-    else return 'No';
-  }
-});
-
 appicenter.controller('AdminCtrl', ['$scope', function($scope) {
 
 }]);
