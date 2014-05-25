@@ -3,10 +3,15 @@ div.scoreboard
   div.info.dn-fade(ng-show="scoreboard.current_view.id == 'auction'") CHARITY AUCTION
   
   div.content.dn-fade-left-big(ng-show="scoreboard.current_view.id == 'auction'")
-    div.block.auction {{auctions[scoreboard.current_auction].name}}
+    div.block.auction
+      img(ng-src="{{auctions[scoreboard.current_auction].image}}")
 
   div.details.dn-fade-up(ng-show="scoreboard.current_view.id == 'auction'")
-    div: h1 All proceeds benefit X CHARITY
+    div
+      ul.list-unstyled
+        li: h1 All proceeds benefit {{auctions[scoreboard.current_auction].charity}}
+        li: img(ng-src="{{auctions[scoreboard.current_auction].charity_image}}")
+        li: h1 {{auctions[scoreboard.current_auction].name}}
 
 
 
@@ -25,4 +30,5 @@ div.scoreboard
         img(ng-src="{{scoreboard.current_photo.images.standard_resolution.url}}")
 
     div.details.dn-fade-up(ng-show="scoreboard.current_view.id == 'instagram'")
-      div: h1 Use tag #Quakes74 on Instagram
+      div: h1 Post a photo with hashtag #Quakes74 on Instagram
+      
