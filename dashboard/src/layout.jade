@@ -1,11 +1,14 @@
 doctype html
 html(lang="en", ng-app="appicenter")
   head
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+
     link(rel="stylesheet", href="style.css")
     script(src="bundle.js")
   body(ng-controller="DashboardCtrl")
-    div.container
+    div.container-fluid
       div.col-lg-12
         h1 Earthquakes Dashboard
         p meow {{meow}}
         p fb {{fb}}
+        button.btn.btn-primary(ng-click="auth.$login('facebook')") Login

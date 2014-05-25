@@ -19,6 +19,7 @@ gulp.task('scripts', function() {
       './bower_components/angular/angular.js',
       './bower_components/firebase/firebase.js',
       './bower_components/angularfire/angularfire.js',
+      './bower_components/firebase-simple-login/firebase-simple-login.js',
       './dashboard/src/app.js',
       './dashboard/src/services/*.js',
       './dashboard/src/controllers/*.js'
