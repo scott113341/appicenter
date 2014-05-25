@@ -34879,10 +34879,6 @@ var appicenter = angular.module('appicenter', ['firebase', 'ngRoute']);
 
 appicenter.config(['$routeProvider', function($routeProvider) {
   $routeProvider
-    .when('/scoreboard', {
-      templateUrl: 'templates/scoreboard.html',
-      controller: 'ScoreboardCtrl'
-    })
     .when('/', {
       templateUrl: 'templates/home.html',
       controller: 'HomeCtrl'
@@ -34890,12 +34886,29 @@ appicenter.config(['$routeProvider', function($routeProvider) {
     .when('/login', {
       templateUrl: 'templates/login.html',
       controller: 'LoginCtrl'
+    })
+
+
+    .when('/admin/scoreboard', {
+      templateUrl: 'templates/scoreboard.html',
+      controller: 'ScoreboardCtrl'
+    })
+    .when('/admin/scoreboard-controller', {
+      templateUrl: 'templates/scoreboard-controller.html',
+      controller: 'ScoreboardControllerCtrl'
+    })
+
+
+    .otherwise({
+      redirectTo: '/'
     });
 }]);
 
 appicenter.factory('firebaseService', ['$firebase', function($firebase) {
-  var ref = new Firebase('https://appicenter.firebaseio.com/');
-  return $firebase(ref);
+  return function(path) {
+    var ref = new Firebase('https://appicenter.firebaseio.com' + path);
+    return $firebase(ref);
+  }
 }]);
 
 appicenter.factory('loginService', ['$firebaseSimpleLogin', function($firebaseSimpleLogin) {
@@ -34926,7 +34939,25 @@ appicenter.controller('LoginCtrl', ['$scope', 'loginService', function($scope, l
   };
 }]);
 
+appicenter.controller('ScoreboardControllerCtrl', ['$scope', 'firebaseService', function($scope, firebaseService) {
+  $scope.views = [
+    {
+      name: 'Auction',
+      id: 'auction',
+      options: {}
+    },
+    {
+      name: 'Instagram',
+      id: 'instagram',
+      options: {}
+    }
+  ];
+
+  $scope.current_view = firebaseService('/scoreboard/current_view');
+  $scope.current_view.$bind($scope, 'current_view');
+}]);
+
 appicenter.controller('ScoreboardCtrl', ['$scope', 'firebaseService', function($scope, firebaseService) {
-  $scope.meow = 'this is what meow says';
-  firebaseService.$bind($scope, 'fb');
+  $scope.scoreboard = firebaseService('/scoreboard');
+  $scope.scoreboard.$bind($scope, 'scoreboard');
 }]);

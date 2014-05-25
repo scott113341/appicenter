@@ -1,0 +1,8 @@
+div.container-fluid
+  div.row
+    div.col-lg-12
+      h1 Scoreboard Controller
+      h2 Currently displaying: <span>{{current_view.name}}</span>
+
+      ul
+        li(ng-repeat="view in views", ng-click="$parent.current_view = view") {{view.name}}

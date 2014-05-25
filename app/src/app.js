@@ -2,10 +2,6 @@ var appicenter = angular.module('appicenter', ['firebase', 'ngRoute']);
 
 appicenter.config(['$routeProvider', function($routeProvider) {
   $routeProvider
-    .when('/scoreboard', {
-      templateUrl: 'templates/scoreboard.html',
-      controller: 'ScoreboardCtrl'
-    })
     .when('/', {
       templateUrl: 'templates/home.html',
       controller: 'HomeCtrl'
@@ -13,5 +9,20 @@ appicenter.config(['$routeProvider', function($routeProvider) {
     .when('/login', {
       templateUrl: 'templates/login.html',
       controller: 'LoginCtrl'
+    })
+
+
+    .when('/admin/scoreboard', {
+      templateUrl: 'templates/scoreboard.html',
+      controller: 'ScoreboardCtrl'
+    })
+    .when('/admin/scoreboard-controller', {
+      templateUrl: 'templates/scoreboard-controller.html',
+      controller: 'ScoreboardControllerCtrl'
+    })
+
+
+    .otherwise({
+      redirectTo: '/'
     });
 }]);

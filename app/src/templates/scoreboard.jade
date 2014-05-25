@@ -1,6 +1,12 @@
 div.container-fluid
   div.row
     div.col-lg-12
-      h1 Earthquakes Scoreboard
-      p meow {{meow}}
-      p fb {{fb}}
+      p {{scoreboard}}
+
+
+      div(ng-if="scoreboard.current_view.id == 'auction'")
+        h1 Auction
+
+
+      div(ng-if="scoreboard.current_view.id == 'instagram'")
+        h1 Instagram
