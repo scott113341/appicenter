@@ -26,6 +26,7 @@ div.container-fluid
               //th Id
               th Displaying?
               th Item
+              th Image
               th In Progress?
               th Time Remaining
               th Starting Price
@@ -36,6 +37,7 @@ div.container-fluid
                 //td {{auction.$id}}
                 td {{auction.$id == current_auction | boolean}}
                 td {{auction.name}}
+                td: img(ng-src="{{auction.image}}", width="20px", height="20px")
                 td {{inProgress(auction) | boolean}}
                 td {{timeRemaining(auction) | zeroToDash}} sec
                 td ${{auction.start_price}}
