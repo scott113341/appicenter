@@ -6,6 +6,9 @@ appicenter.controller('AuctionCtrl', ['$scope', '$location', '$timeout', '$route
     if (!user) {
       $location.path('/login');
     }
+    else {
+      $scope.user = user;
+    }
   });
 
 
@@ -45,5 +48,11 @@ appicenter.controller('AuctionCtrl', ['$scope', '$location', '$timeout', '$route
     $timeout(function() {
       $scope.updateProgress();
     }, 1000);
+  };
+
+
+  $scope.bid = function(amount) {
+    $scope.auction.current_price = amount;
+    $scope.auction.highest_bidder = $scope.user.email;
   };
 }]);

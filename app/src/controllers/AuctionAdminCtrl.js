@@ -26,8 +26,6 @@ appicenter.controller('AuctionAdminCtrl', ['$scope', '$timeout', 'firebaseServic
 
 
   $scope.createAuction = function() {
-    console.log($scope.auctions);
-
     $scope.auctions.$add({
       name: $scope.new_auction.name,
       description: $scope.new_auction.description,
