@@ -1,9 +1,11 @@
 div.container-fluid
   div.row
-    div.col-lg-12
+    div.col-md-3
       h1 Login
-      input.large(type="email", ng-model="email", placeholder="Email")
-      br
-      input(type="password", ng-model="password", placeholder="Password")
-      br
-      button.btn(ng-click="login()") Login
+      form(ng-submit="login()")
+        div.form-group
+          input.form-control(type="email", ng-model="email", placeholder="Email")
+        div.form-group
+          input.form-control(type="password", ng-model="password", placeholder="Password")
+        div.form-group
+          button.btn.btn-primary.form-control(ng-click="login()") Login
