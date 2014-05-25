@@ -8,6 +8,16 @@
 	flex-flow:row wrap;
 
 	.item {
-		margin:10px;
+		text-align:center;
+		padding:18px;
+
+		&.ng-enter {
+			animation: fadeInUp 0.5s;
+		}
+
+		&.selected {
+			background-color:#eee;
+		}
 	}
+
 }
