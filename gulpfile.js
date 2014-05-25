@@ -7,17 +7,24 @@ var source = require('vinyl-source-stream');
 var rename = require('gulp-rename');
 var notify = require('gulp-notify');
 var prefix = require('gulp-autoprefixer');
+var concat = require('gulp-concat');
 
 var handleErrors = function (error) {
  	return 'Error on line' + error.line + ' :' + error.message;
 };
 
 gulp.task('scripts', function() {
-  browserify('./dashboard/src/app.js')
-  .bundle({debug: true})
-  .on('error', notify.onError(handleErrors))
-  .pipe(source('bundle.js'))
-  .pipe(gulp.dest('./dashboard/build/'));
+  gulp
+    .src([
+      './bower_components/angular/angular.js',
+      './bower_components/firebase/firebase.js',
+      './bower_components/angularfire/angularfire.js',
+      './dashboard/src/app.js',
+      './dashboard/src/services/*.js',
+      './dashboard/src/controllers/*.js'
+    ])
+    .pipe(concat('bundle.js'))
+    .pipe(gulp.dest('./dashboard/build/'));
 });
 
 gulp.task('less', function() {
@@ -29,7 +36,6 @@ gulp.task('less', function() {
 });
 
 gulp.task('jade', function() {
-
 	gulp.src('./dashboard/src/layout.jade')
 		.pipe(jade())
 		.on('error', notify.onError(handleErrors))

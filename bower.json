@@ -1,0 +1,14 @@
+{
+  "name": "appicenter",
+  "version": "0.0.0",
+  "homepage": "https://github.com/scott113341/appicenter",
+  "authors": [
+    "Scott Hardy <scott.the.hardy@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.2.16",
+    "angularfire": "firebase/angularFire#~0.7.1"
+  }
+}

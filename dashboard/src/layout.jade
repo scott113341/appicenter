@@ -1,16 +1,11 @@
 doctype html
-html(lang="en",ng-app="app")
+html(lang="en", ng-app="appicenter")
   head
     link(rel="stylesheet", href="style.css")
-  body
+    script(src="bundle.js")
+  body(ng-controller="DashboardCtrl")
     div.container
       div.col-lg-12
         h1 Earthquakes Dashboard
-          div(ng-controller="MyController")
-            div#messagesDiv
-            div(ng-repeat="msg in messages")
-            <em>{{msg.from}}</em>: {{msg.body}}</div>
-            <input type="text" ng-model="name" placeholder="Name">
-            <input type="text" ng-model="msg" ng-keydown="addMessage($event)" placeholder="Message...">
-
-    script(src="bundle.js")
+        p meow {{meow}}
+        p fb {{fb}}
