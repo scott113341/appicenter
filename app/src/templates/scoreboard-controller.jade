@@ -59,7 +59,7 @@ div.container-fluid
     div.col-lg-12
       div.media
         div.pull-left
-          img.media-object(src="{{current_photo.images.low_resolution.url}}")
+          img.media-object(ng-src="{{current_photo.images.low_resolution.url}}")
         div.media-body
           h2 Current Image
           p {{current_photo.caption.from.username}}
@@ -69,8 +69,8 @@ div.container-fluid
       div.row
         h2 Instagram Feed
         div.row.feed
-          div.item.dn-fade-up(ng-repeat="(key,media) in photos | orderBy:key",ng-class="{selected:$parent.current_photo.id == media.id}")
-            p: img(src="{{media.images.thumbnail.url}}")
+          div.item(ng-repeat="(key,media) in photos | orderBy:key",ng-class="{selected:$parent.current_photo.id == media.id}")
+            p: img(ng-src="{{media.images.thumbnail.url}}")
             div
               p {{media.caption.text}}
               p {{media.caption.from.username}}

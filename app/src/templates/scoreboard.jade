@@ -1,21 +1,28 @@
-div.container-fluid
-  div.row
-    div.col-lg-12
+div.scoreboard
+  
+  div.info.dn-fade(ng-show="scoreboard.current_view.id == 'auction'") CHARITY AUCTION
+  
+  div.content.dn-fade-left-big(ng-show="scoreboard.current_view.id == 'auction'")
+    div.block.auction {{auctions[scoreboard.current_auction].name}}
+
+  div.details.dn-fade-up(ng-show="scoreboard.current_view.id == 'auction'")
+    div: h1 All proceeds benefit X CHARITY
 
 
-      div(ng-if="scoreboard.current_view.id == 'auction'")
-        h1 Auction
 
+  div.info.dn-fade(ng-show="scoreboard.current_view.id == 'instagram'") FAN SPOTLIGHT
 
-      div(ng-if="scoreboard.current_view.id == 'instagram'")
-        h1 Instagram
-        div.row
-          span {{scoreboard.current_photo.caption.from.username}}
-          img(src="{{scoreboard.current_photo.caption.from.profile_picture}}")
-        div.row
-          h3 {{scoreboard.current_photo.caption.text}}
-            span(am-time-ago="scoreboard.current_photo.caption.created_time" am-preprocess="unix")
-        div.row
-          img(src="{{scoreboard.current_photo.images.standard_resolution.url}}")
-        div.row
-          
+  div.content
+    div.dn-fade-left-big(ng-show="scoreboard.current_view.id == 'instagram'")
+      div.instagram.block
+        div.media
+          img.profile-img.pull-left(ng-src="{{scoreboard.current_photo.caption.from.profile_picture}}")
+          p.profile-name {{scoreboard.current_photo.caption.from.username}}
+          p(am-time-ago="scoreboard.current_photo.caption.created_time" am-preprocess="unix")
+        
+        h3 {{scoreboard.current_photo.caption.text}}
+        
+        img(ng-src="{{scoreboard.current_photo.images.standard_resolution.url}}")
+
+    div.details.dn-fade-up(ng-show="scoreboard.current_view.id == 'instagram'")
+      div: h1 Use tag #Quakes74 on Instagram
