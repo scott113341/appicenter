@@ -40134,6 +40134,205 @@ angular.module('ngAnimate', ['ng'])
 
 })(window, window.angular);
 
+angular.module('ngAnimate-animate.css', ['ngAnimate'])
+
+  .factory('animateCSSBuild', ['$timeout', function($timeout) {
+    return function(baseClass, classNames) {
+      if(arguments.length == 3) {
+        var a = classNames;
+        var b = arguments[2];
+        classNames = {
+          enter : a,
+          move : a,
+          leave : b,
+          show : a,
+          hide : b,
+          addClass : a,
+          removeClass : b
+        };
+      }
+      var timeoutKey = '$$animate.css-timer';
+      var animateCSSStart = function(element, className, delay, done) {
+        element.addClass(className);
+        element.addClass('animated');
+        var timer = $timeout(done, delay || 2000, false);
+        element.data(timeoutKey, timer);
+      };
+      var animateCSSEnd = function(element, className) {
+        return function(cancelled) {
+          var timer = element.data(timeoutKey);
+          if(timer) {
+            $timeout.cancel(timer);
+            element.removeData(timeoutKey);
+          }
+          element.removeClass(className);
+          element.removeClass('animated');
+        };
+      };
+      return {
+        enter : function(element, done) {
+          animateCSSStart(element, classNames.enter, classNames.delay, done);
+          return animateCSSEnd(element, classNames.enter);
+        },
+        leave : function(element, done) {
+          animateCSSStart(element, classNames.leave, classNames.delay, done);
+          return animateCSSEnd(element, classNames.leave);
+        },
+        move : function(element, done) {
+          animateCSSStart(element, classNames.move, classNames.delay, done);
+          return animateCSSEnd(element, classNames.move);
+        },
+        beforeAddClass : function(element, className, done) {
+          var klass = className == 'ng-hide' &&
+                      (classNames.hide ||
+                        (angular.isFunction(classNames.addClass) ?
+                          classNames.addClass(className) :
+                          classNames.addClass));
+          if(klass) {
+            animateCSSStart(element, klass, classNames.delay, done);
+            return animateCSSEnd(element, klass);
+          }
+          done();
+        },
+        addClass : function(element, className, done) {
+          var klass = className != 'ng-hide' &&
+                      (angular.isFunction(classNames.addClass) ?
+                        classNames.addClass(className) :
+                        classNames.addClass);
+          if(klass) {
+            animateCSSStart(element, klass, classNames.delay, done);
+            return animateCSSEnd(element, klass);
+          }
+          done();
+        },
+        removeClass : function(element, className, done) {
+          var klass = (className == 'ng-hide' && classNames.show) ||
+                      (angular.isFunction(classNames.removeClass) ?
+                        classNames.removeClass(className) :
+                        classNames.removeClass);
+          if(klass) {
+            animateCSSStart(element, klass, classNames.delay, done);
+            return animateCSSEnd(element, klass);
+          }
+          done();
+        }
+      }
+    };
+  }])
+
+
+  //
+  // Flip Animations
+  //
+  .animation('.dn-flip-x', ['animateCSSBuild', function(animateCSSBuild) {
+    return animateCSSBuild('dn-flip-x','flipInX','flipOutX');
+  }])
+
+  .animation('.dn-flip-y', ['animateCSSBuild', function(animateCSSBuild) {
+    return animateCSSBuild('dn-flip-y','flipInY','flipOutY');
+  }])
+
+  //
+  // Fade Animations
+  //
+  .animation('.dn-fade', ['animateCSSBuild', function(animateCSSBuild) {
+    return animateCSSBuild('dn-fade','fadeIn','fadeOut');
+  }])
+
+  .animation('.dn-fade-up', ['animateCSSBuild', function(animateCSSBuild) {
+    return animateCSSBuild('dn-fade-up','fadeInUp','fadeOutUp');
+  }])
+
+  .animation('.dn-fade-down', ['animateCSSBuild', function(animateCSSBuild) {
+    return animateCSSBuild('dn-fade-down','fadeInDown','fadeOutDown');
+  }])
+
+  .animation('.dn-fade-left', ['animateCSSBuild', function(animateCSSBuild) {
+    return animateCSSBuild('dn-fade-left','fadeInLeft','fadeOutLeft');
+  }])
+
+  .animation('.dn-fade-right', ['animateCSSBuild', function(animateCSSBuild) {
+    return animateCSSBuild('dn-fade-right','fadeInRight','fadeOutRight');
+  }])
+
+  .animation('.dn-fade-up-big', ['animateCSSBuild', function(animateCSSBuild) {
+    return animateCSSBuild('dn-fade-up-big','fadeInUpBig','fadeOutUpBig');
+  }])
+
+  .animation('.dn-fade-down-big', ['animateCSSBuild', function(animateCSSBuild) {
+    return animateCSSBuild('dn-fade-down-big','fadeInDownBig','fadeOutDownBig');
+  }])
+
+  .animation('.dn-fade-left-big', ['animateCSSBuild', function(animateCSSBuild) {
+    return animateCSSBuild('dn-fade-left-big','fadeInLeftBig','fadeOutLeftBig');
+  }])
+
+  .animation('.dn-fade-right-big', ['animateCSSBuild', function(animateCSSBuild) {
+    return animateCSSBuild('dn-fade-right-big','fadeInRightBig','fadeOutRightBig');
+  }])
+
+
+  //
+  // Bounce Animations
+  //
+  .animation('.dn-bounce', ['animateCSSBuild', function(animateCSSBuild) {
+    return animateCSSBuild('dn-bounce','bounceIn','bounceOut');
+  }])
+
+  .animation('.dn-bounce-up', ['animateCSSBuild', function(animateCSSBuild) {
+    return animateCSSBuild('dn-bounce-up','bounceInUp','bounceOutUp');
+  }])
+
+  .animation('.dn-bounce-down', ['animateCSSBuild', function(animateCSSBuild) {
+    return animateCSSBuild('dn-bounce-down','bounceInDown','bounceOutDown');
+  }])
+
+  .animation('.dn-bounce-left', ['animateCSSBuild', function(animateCSSBuild) {
+    return animateCSSBuild('dn-bounce-left','bounceInLeft','bounceOutLeft');
+  }])
+
+  .animation('.dn-bounce-right', ['animateCSSBuild', function(animateCSSBuild) {
+    return animateCSSBuild('dn-bounce-right','bounceInRight','bounceOutRight');
+  }])
+
+  //
+  // Rotate Animations
+  //
+  .animation('.dn-rotate', ['animateCSSBuild', function(animateCSSBuild) {
+    return animateCSSBuild('dn-rotate','rotateIn','rotateOut');
+  }])
+
+  .animation('.dn-rotate-up-left', ['animateCSSBuild', function(animateCSSBuild) {
+    return animateCSSBuild('dn-rotate-up-left','rotateInUpLeft','rotateOutUpLeft');
+  }])
+
+  .animation('.dn-rotate-down-left', ['animateCSSBuild', function(animateCSSBuild) {
+    return animateCSSBuild('dn-rotate-down-left','rotateInDownLeft','rotateOutDownLeft');
+  }])
+
+  .animation('.dn-rotate-up-right', ['animateCSSBuild', function(animateCSSBuild) {
+    return animateCSSBuild('dn-rotate-up-right','rotateInUpRight','rotateOutUpRight');
+  }])
+
+  .animation('.dn-rotate-down-right', ['animateCSSBuild', function(animateCSSBuild) {
+    return animateCSSBuild('dn-rotate-down-right','rotateInDownRight','rotateOutDownRight');
+  }])
+
+  //
+  // Other Animations
+  //
+  .animation('.dn-lightspeed', ['animateCSSBuild', function(animateCSSBuild) {
+    return animateCSSBuild('dn-lightspeed','lightSpeedIn','lightSpeedOut');
+  }])
+
+  .animation('.dn-roll', ['animateCSSBuild', function(animateCSSBuild) {
+    return animateCSSBuild('dn-roll','rollIn','rollOut');
+  }])
+
+  .animation('.dn-hinge', ['animateCSSBuild', function(animateCSSBuild) {
+    return animateCSSBuild('dn-hinge','fadeIn','hinge');
+  }]);
+
 (function() {var COMPILED=!0,goog=goog||{};goog.global=this;goog.exportPath_=function(a,b,c){a=a.split(".");c=c||goog.global;a[0]in c||!c.execScript||c.execScript("var "+a[0]);for(var d;a.length&&(d=a.shift());)a.length||void 0===b?c=c[d]?c[d]:c[d]={}:c[d]=b};goog.define=function(a,b){var c=b;COMPILED||goog.global.CLOSURE_DEFINES&&Object.prototype.hasOwnProperty.call(goog.global.CLOSURE_DEFINES,a)&&(c=goog.global.CLOSURE_DEFINES[a]);goog.exportPath_(a,c)};goog.DEBUG=!0;goog.LOCALE="en";goog.TRUSTED_SITE=!0;
 goog.provide=function(a){if(!COMPILED){if(goog.isProvided_(a))throw Error('Namespace "'+a+'" already declared.');delete goog.implicitNamespaces_[a];for(var b=a;(b=b.substring(0,b.lastIndexOf(".")))&&!goog.getObjectByName(b);)goog.implicitNamespaces_[b]=!0}goog.exportPath_(a)};goog.setTestOnly=function(a){if(COMPILED&&!goog.DEBUG)throw a=a||"",Error("Importing test-only code into non-debug environment"+a?": "+a:".");};goog.forwardDeclare=function(a){};
 COMPILED||(goog.isProvided_=function(a){return!goog.implicitNamespaces_[a]&&goog.isDefAndNotNull(goog.getObjectByName(a))},goog.implicitNamespaces_={});goog.getObjectByName=function(a,b){for(var c=a.split("."),d=b||goog.global,e;e=c.shift();)if(goog.isDefAndNotNull(d[e]))d=d[e];else return null;return d};goog.globalize=function(a,b){var c=b||goog.global,d;for(d in a)c[d]=a[d]};
@@ -40297,7 +40496,7 @@ var f=new fb.simplelogin.client(a,b,c,d);return{setApiHost:function(a){fb.simple
 3,c,!1);f.createUser(a,b,c)},changePassword:function(a,b,c,d){fb.simplelogin.util.validation.validateArgCount("FirebaseSimpleLogin.changePassword",4,4,arguments.length);fb.simplelogin.util.validation.validateCallback("FirebaseSimpleLogin.changePassword",4,d,!1);f.changePassword(a,b,c,d)},removeUser:function(a,b,c){fb.simplelogin.util.validation.validateArgCount("FirebaseSimpleLogin.removeUser",3,3,arguments.length);fb.simplelogin.util.validation.validateCallback("FirebaseSimpleLogin.removeUser",3,
 c,!1);f.removeUser(a,b,c)},sendPasswordResetEmail:function(a,b){fb.simplelogin.util.validation.validateArgCount("FirebaseSimpleLogin.sendPasswordResetEmail",2,2,arguments.length);fb.simplelogin.util.validation.validateCallback("FirebaseSimpleLogin.sendPasswordResetEmail",2,b,!1);f.sendPasswordResetEmail(a,b)}}};goog.exportSymbol("FirebaseSimpleLogin",FirebaseSimpleLogin);FirebaseSimpleLogin.onOpen=function(a){fb.simplelogin.client.onOpen(a)};goog.exportProperty(FirebaseSimpleLogin,"onOpen",FirebaseSimpleLogin.onOpen);})();
 
-var appicenter = angular.module('appicenter', ['firebase', 'ngRoute','mgcrea.ngStrap','ngAnimate']);
+var appicenter = angular.module('appicenter', ['firebase', 'ngRoute','mgcrea.ngStrap','ngAnimate','ngAnimate-animate.css']);
 
 appicenter.config(['$routeProvider', function($routeProvider) {
   $routeProvider

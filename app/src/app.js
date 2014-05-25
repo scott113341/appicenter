@@ -1,4 +1,4 @@
-var appicenter = angular.module('appicenter', ['firebase', 'ngRoute','mgcrea.ngStrap','ngAnimate']);
+var appicenter = angular.module('appicenter', ['firebase', 'ngRoute','mgcrea.ngStrap','ngAnimate','ngAnimate-animate.css']);
 
 appicenter.config(['$routeProvider', function($routeProvider) {
   $routeProvider

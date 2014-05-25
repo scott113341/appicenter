@@ -11,4 +11,4 @@ div.container-fluid
 
       h2 Instagram Photos
       div
-        img(ng-repeat="media in photos",src="{{media.images.thumbnail.url}}",ng-click="$parent.current_photo = media",width="300")
+        img.dn-fade-up(ng-repeat="(key,media) in photos | orderBy:key",src="{{media.images.thumbnail.url}}",ng-click="$parent.current_photo = media")
