@@ -14,6 +14,14 @@ div.container-fluid
               .col-sm-10
                 input#name.form-control(type='text', placeholder='Item name', ng-model='new_auction.name')
             .form-group
+              label.col-sm-2.control-label(for='description') Description
+              .col-sm-10
+                input#description.form-control(type='text', placeholder='Description', ng-model='new_auction.description')
+            .form-group
+              label.col-sm-2.control-label(for='charity') Charity
+              .col-sm-10
+                input#charity.form-control(type='text', placeholder='Charity', ng-model='new_auction.charity')
+            .form-group
               label.col-sm-2.control-label(for='image') Image URL
               .col-sm-10
                 input#image.form-control(type='text', placeholder='Image URL', ng-model='new_auction.image')
@@ -35,6 +43,7 @@ div.container-fluid
         thead
           //th Id
           th Item
+          th Charity
           th Image
           th In Progress?
           th Time Remaining
@@ -49,6 +58,7 @@ div.container-fluid
           tr(ng-repeat="auction in auctions | orderByPriority | reverse", ng-class="{success: inProgress(auction)}")
             //td {{auction.$id}}
             td {{auction.name}}
+            td {{auction.charity}}
             td: img.mini-pic(ng-src="{{auction.image}}")
             td {{inProgress(auction) | boolean}}
             td {{timeRemaining(auction) | zeroToDash}} sec
@@ -60,5 +70,6 @@ div.container-fluid
             td ${{auction.current_price}}
             td {{auction.highest_bidder}}
             td
-              button.btn.btn-success.btn-xs(ng-click="startAuction(auction)") Start
-              button.btn.btn-danger.btn-xs Stop
+              div.btn-group
+                button.btn.btn-success.btn-xs(ng-click="startAuction(auction)") Start
+                button.btn.btn-danger.btn-xs Stop

@@ -26,6 +26,7 @@ div.container-fluid
               //th Id
               th Displaying?
               th Item
+              th Charity
               th Image
               th In Progress?
               th Time Remaining
@@ -37,15 +38,17 @@ div.container-fluid
                 //td {{auction.$id}}
                 td {{auction.$id == current_auction | boolean}}
                 td {{auction.name}}
+                td {{auction.charity}}
                 td: img.mini-pic(ng-src="{{auction.image}}")
                 td {{inProgress(auction) | boolean}}
                 td {{timeRemaining(auction) | zeroToDash}} sec
                 td ${{auction.start_price}}
                 td ${{auction.current_price}}
                 td
-                  button.btn.btn-primary.btn-xs(ng-click="displayAuction(auction)") Display
-                  button.btn.btn-success.btn-xs(ng-click="startAuction(auction)") Start
-                  button.btn.btn-danger.btn-xs Stop
+                  div.btn-group
+                    button.btn.btn-primary.btn-xs(ng-click="displayAuction(auction)") Display
+                    button.btn.btn-success.btn-xs(ng-click="startAuction(auction)") Start
+                    button.btn.btn-danger.btn-xs Stop
 
 
 

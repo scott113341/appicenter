@@ -3,28 +3,30 @@ include partials/navigation
 div.container-fluid
   div.row
     div.col-lg-12
-      h1 Auction
-      h2 {{auction.name}}
-      //p {{auctions}}
-      //p {{auction}}
-      //p {{progress}}
+      h2 {{auction.name}} Auction
+      h3 Benefit for {{auction.charity}}
+      p {{auction.description}}
 
-      div.row
-        div.col-xs-6
-          img(ng-src="{{auction.image}}", style="max-width:100%;")
-        div.col-xs-6
-          div(ng-if="!finished")
-            h3 ${{auction.current_price}} <small>current bid</small>
-            button.btn.btn-success Bid ${{auction.current_price + 1}}
-          div(ng-if="finished")
-            h3 ${{auction.current_price}} <small>winning bid</small>
+  div.row
+    div.col-xs-6
+      img(ng-src="{{auction.image}}", style="max-width:100%;")
+    div.col-xs-6
+      div(ng-if="status == 0")
+        h3 ${{auction.current_price}} <small>starting bid</small>
+      div(ng-if="status == 1")
+        h3 ${{auction.current_price}} <small>current bid</small>
+        button.btn.btn-success Bid ${{auction.current_price + 1}}
+      div(ng-if="status == 2")
+        h3 ${{auction.current_price}} <small>winning bid</small>
 
-      div.row
-        div.col-xs-12
-          br
-          div(ng-if="!finished")
-            div.progress.progress-striped.active
-              div.progress-bar(ng-style="{width: progress.percent}")
-            p {{progress.time_remaining}} remaining
-          div(ng-if="finished")
-            h4 Bidding has ended.
+  div.row
+    div.col-xs-12
+      br
+      div(ng-if="status == 0")
+        h4.center Bidding is about to begin!
+      div(ng-if="status == 1")
+        div.progress.progress-striped.active
+          div.progress-bar(ng-style="{width: progress.percent}")
+        p.center {{progress.time_remaining}} seconds remaining
+      div(ng-if="status == 2")
+        h4.center Bidding has ended.
