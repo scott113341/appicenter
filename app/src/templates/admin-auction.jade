@@ -18,13 +18,17 @@ div.container-fluid
               .col-sm-10
                 input#description.form-control(type='text', placeholder='Description', ng-model='new_auction.description')
             .form-group
+              label.col-sm-2.control-label(for='image') Image URL
+              .col-sm-10
+                input#image.form-control(type='text', placeholder='Image URL', ng-model='new_auction.image')
+            .form-group
               label.col-sm-2.control-label(for='charity') Charity
               .col-sm-10
                 input#charity.form-control(type='text', placeholder='Charity', ng-model='new_auction.charity')
             .form-group
-              label.col-sm-2.control-label(for='image') Image URL
+              label.col-sm-2.control-label(for='charity_image') Charity Image URL
               .col-sm-10
-                input#image.form-control(type='text', placeholder='Image URL', ng-model='new_auction.image')
+                input#charity_image.form-control(type='text', placeholder='Charity Image URL', ng-model='new_auction.charity_image')
             .form-group
               label.col-sm-2.control-label(for='duration') Duration (minutes)
               .col-sm-10
