@@ -23,6 +23,8 @@ gulp.task('scripts', function() {
       './bower_components/angular-strap/dist/angular-strap.tpl.js',
       './bower_components/angular-animate/angular-animate.js',
       './bower_components/ngAnimate-animate.css/animate.js',
+      './bower_components/moment/moment.js',
+      './bower_components/angular-moment/angular-moment.js',
       './bower_components/firebase-simple-login/firebase-simple-login.js',
       './app/src/app.js',
       './app/src/services/*.js',

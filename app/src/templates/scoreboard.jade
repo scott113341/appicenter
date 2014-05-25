@@ -1,7 +1,6 @@
 div.container-fluid
   div.row
     div.col-lg-12
-      p {{scoreboard}}
 
 
       div(ng-if="scoreboard.current_view.id == 'auction'")
@@ -10,5 +9,13 @@ div.container-fluid
 
       div(ng-if="scoreboard.current_view.id == 'instagram'")
         h1 Instagram
-        p CurrentPhoto: {{scoreboard.current_photo}}
-        img(src="{{scoreboard.current_photo.images.standard_resolution.url}}")
+        div.row
+          span {{scoreboard.current_photo.caption.from.username}}
+          img(src="{{scoreboard.current_photo.caption.from.profile_picture}}")
+        div.row
+          h3 {{scoreboard.current_photo.caption.text}}
+            span(am-time-ago="scoreboard.current_photo.caption.created_time" am-preprocess="unix")
+        div.row
+          img(src="{{scoreboard.current_photo.images.standard_resolution.url}}")
+        div.row
+          
