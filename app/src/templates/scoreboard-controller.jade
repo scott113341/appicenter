@@ -1,10 +1,38 @@
-include partials/navigation
+include partials/admin-navigation
 
 div.container-fluid
   div.row
     div.col-lg-12
-      h1 Scoreboard Controller1
+      h1 Scoreboard Controller
+
+      button.btn.btn-primary(ng-click="show_preview = !show_preview") Preview output
+      iframe(src="/#/admin/scoreboard", width="600px", height="400px")
+
+
       h2 Currently displaying: <span>{{current_view.name}}</span>
+
+
+
+
+
+      div.btn-group
+        button.btn.btn-default.dropdown-toggle(type="button", data-toggle="dropdown") Action <span class="caret"></span>
+        ul.dropdown-menu
+          li
+            a Auction
+          li
+            a Instagram
+
+
+  div.row
+    div.col-lg-12
+      h1 Auction Config
+      table.table.
+        thead
+
+
+
+
 
       div.btn-group
         label.btn.btn-default(ng-repeat="view in views",ng-click="$parent.current_view=view",ng-class="{active:$parent.current_view.id==view.id}") {{view.name}}

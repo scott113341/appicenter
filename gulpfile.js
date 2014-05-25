@@ -24,6 +24,7 @@ gulp.task('scripts', function() {
       './bower_components/firebase-simple-login/firebase-simple-login.js',
       './app/src/app.js',
       './app/src/services/*.js',
+      './app/src/filters/*.js',
       './app/src/controllers/*.js'
     ])
     .pipe(concat('bundle.js'))

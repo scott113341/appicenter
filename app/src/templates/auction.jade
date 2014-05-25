@@ -4,3 +4,20 @@ div.container-fluid
   div.row
     div.col-lg-12
       h1 Auction
+      h2 {{auction.name}}
+      //p {{auctions}}
+      //p {{auction}}
+      //p {{progress}}
+
+      div.row
+        div.col-xs-6
+          img(ng-src="{{auction.image}}", style="max-width:100%;")
+        div.col-xs-6
+          h3 ${{auction.current_price}} <small>current bid</small>
+          button.btn.btn-success Bid ${{auction.current_price + 1}}
+      div.row
+        div.col-xs-12
+          br
+          div.progress.progress-striped.active
+            div.progress-bar(ng-style="{width: progress.percent}")
+          p {{progress.time_remaining}} remaining

@@ -38702,6 +38702,10 @@ appicenter.config(['$routeProvider', function($routeProvider) {
     })
 
 
+    .when('/admin', {
+      templateUrl: 'templates/admin.html',
+      controller: 'AdminCtrl'
+    })
     .when('/admin/scoreboard', {
       templateUrl: 'templates/scoreboard.html',
       controller: 'ScoreboardCtrl'
@@ -38709,6 +38713,10 @@ appicenter.config(['$routeProvider', function($routeProvider) {
     .when('/admin/scoreboard-controller', {
       templateUrl: 'templates/scoreboard-controller.html',
       controller: 'ScoreboardControllerCtrl'
+    })
+    .when('/admin/auctions', {
+      templateUrl: 'templates/admin-auction.html',
+      controller: 'AuctionAdminCtrl'
     })
 
 
@@ -38729,7 +38737,56 @@ appicenter.factory('loginService', ['$firebaseSimpleLogin', function($firebaseSi
   return $firebaseSimpleLogin(ref);
 }]);
 
-appicenter.controller('AuctionCtrl', ['$scope', '$location', 'loginService', function($scope, $location, loginService) {
+appicenter.filter("asDate", function() {
+  return function(input) {
+    return new Date(input);
+  }
+});
+
+appicenter.filter("boolean", function() {
+  return function(input) {
+    if (input === true) return 'Yes';
+    else return 'No';
+  }
+});
+
+appicenter.controller('AuctionCtrl', ['$scope', function($scope) {
+
+}]);
+
+appicenter.controller('AuctionAdminCtrl', ['$scope', 'firebaseService', function($scope, firebaseService) {
+  var auctionsRef = firebaseService('/auctions');
+  auctionsRef.$bind($scope, 'auctions');
+
+
+  $scope.inProgress = function(auction) {
+    return Date.now() < auction.end_time;
+  };
+
+
+
+  $scope.createAuction = function() {
+    $scope.auctions.$add({
+      name: $scope.new_auction.name,
+      duration: $scope.new_auction.duration*60*1000,
+      image: $scope.new_auction.image,
+      start_time: 0,
+      end_time: 0,
+      start_price: $scope.new_auction.start_price,
+      current_price: 0,
+      highest_bidder: 'none'
+    });
+  };
+
+
+
+  $scope.startAuction = function(auction) {
+    auction.start_time = Date.now();
+    auction.end_time = Date.now() + auction.duration;
+  };
+}]);
+
+appicenter.controller('AuctionCtrl', ['$scope', '$location', '$timeout', 'firebaseService', 'loginService', function($scope, $location, $timeout, firebaseService, loginService) {
   // make sure user is logged in
   $scope.auth = loginService;
   $scope.auth.$getCurrentUser().then(function(user) {
@@ -38738,6 +38795,31 @@ appicenter.controller('AuctionCtrl', ['$scope', '$location', 'loginService', fun
       $location.path('/login');
     }
   });
+
+
+
+  var auctionsRef = firebaseService('/auctions');
+  auctionsRef.$bind($scope, 'auctions').then(function() {
+    $scope.auction = $scope.auctions['-JNm_v_JD9F7gsFpuDvO'];
+    $scope.updateProgress();
+  });
+
+
+
+  $scope.updateProgress = function() {
+    var auction = $scope.auction;
+    var percent = (Date.now() - auction.start_time) / auction.duration * 100;
+    var time_remaining = (auction.duration - auction.duration * percent / 100) / 1000;
+
+    $scope.progress = {
+      percent: percent.toFixed(2) + '%',
+      time_remaining: Math.floor(time_remaining)
+    };
+
+    $timeout(function() {
+      $scope.updateProgress();
+    }, 1000);
+  };
 }]);
 
 appicenter.controller('HomeCtrl', ['$scope', 'loginService', function($scope, loginService) {
