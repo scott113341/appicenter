@@ -37,7 +37,10 @@ appicenter.controller('AuctionCtrl', ['$scope', '$location', '$timeout', '$route
       percent: percent.toFixed(2) + '%',
       time_remaining: Math.floor(time_remaining)
     };
-    $scope.finished = time_remaining <= 0;
+
+    if (auction.start_time == 0) $scope.status = 0;
+    else if (time_remaining > 0) $scope.status = 1;
+    else if (time_remaining <= 0) $scope.status = 2;
 
     $timeout(function() {
       $scope.updateProgress();

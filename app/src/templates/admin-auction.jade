@@ -14,6 +14,10 @@ div.container-fluid
               .col-sm-10
                 input#name.form-control(type='text', placeholder='Item name', ng-model='new_auction.name')
             .form-group
+              label.col-sm-2.control-label(for='description') Description
+              .col-sm-10
+                input#description.form-control(type='text', placeholder='Description', ng-model='new_auction.description')
+            .form-group
               label.col-sm-2.control-label(for='charity') Charity
               .col-sm-10
                 input#charity.form-control(type='text', placeholder='Charity', ng-model='new_auction.charity')
