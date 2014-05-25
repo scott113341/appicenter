@@ -14,6 +14,7 @@ gulp.task('scripts', function() {
   gulp
     .src([
       './bower_components/angular/angular.js',
+      './bower_components/angular-route/angular-route.js',
       './bower_components/firebase/firebase.js',
       './bower_components/angularfire/angularfire.js',
       './bower_components/firebase-simple-login/firebase-simple-login.js',

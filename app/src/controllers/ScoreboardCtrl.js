@@ -1,4 +1,4 @@
-appicenter.controller('DashboardCtrl', ['$scope', 'firebaseService', '$firebase', '$firebaseSimpleLogin', function($scope, firebaseService, $firebase, $firebaseSimpleLogin) {
+appicenter.controller('ScoreboardCtrl', ['$scope', 'firebaseService', '$firebase', '$firebaseSimpleLogin', function($scope, firebaseService, $firebase, $firebaseSimpleLogin) {
 
   $scope.meow = 'this is what meow says';
 
