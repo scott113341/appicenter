@@ -36,8 +36,7 @@ div.container-fluid
 
       div.btn-group
         label.btn.btn-default(ng-repeat="view in views",ng-click="$parent.current_view=view",ng-class="{active:$parent.current_view.id==view.id}") {{view.name}}
-        
+
       h2 Instagram Photos
-      ul
-        li(ng-repeat="photo in photos")
-          img(src="{{photo}}",ng-click="$parent.current_photo = photo",width="300")
+      div
+        img.dn-fade-up(ng-repeat="(key,media) in photos | orderBy:key",src="{{media.images.thumbnail.url}}",ng-click="$parent.current_photo = media")
