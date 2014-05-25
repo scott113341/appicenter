@@ -46,10 +46,10 @@ div.container-fluid
           th Actions
 
         tbody
-          tr(ng-repeat="auction in auctions | orderByPriority", ng-class="{success: inProgress(auction)}")
+          tr(ng-repeat="auction in auctions | orderByPriority | reverse", ng-class="{success: inProgress(auction)}")
             //td {{auction.$id}}
             td {{auction.name}}
-            td: img(ng-src="{{auction.image}}", width="20px", height="20px")
+            td: img.mini-pic(ng-src="{{auction.image}}")
             td {{inProgress(auction) | boolean}}
             td {{timeRemaining(auction) | zeroToDash}} sec
             td(ng-if="auction.start_time == 0") -

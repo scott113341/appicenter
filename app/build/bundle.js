@@ -43392,6 +43392,12 @@ appicenter.filter("boolean", function() {
   }
 });
 
+appicenter.filter('reverse', function() {
+  return function(items) {
+    return items.slice().reverse();
+  };
+});
+
 appicenter.filter("zeroToDash", function() {
   return function(input) {
     if (input == 0) return '-';
