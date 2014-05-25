@@ -5,5 +5,13 @@ appicenter.config(['$routeProvider', function($routeProvider) {
     .when('/scoreboard', {
       templateUrl: 'templates/scoreboard.html',
       controller: 'ScoreboardCtrl'
+    })
+    .when('/', {
+      templateUrl: 'templates/home.html',
+      controller: 'HomeCtrl'
+    })
+    .when('/login', {
+      templateUrl: 'templates/login.html',
+      controller: 'LoginCtrl'
     });
 }]);
