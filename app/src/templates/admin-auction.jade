@@ -27,7 +27,7 @@ div.container-fluid
                 input#start_price.form-control(type='number', placeholder='Starting price', ng-model='new_auction.start_price')
             .form-group
               .col-sm-offset-2.col-sm-10
-                button.btn.btn-success(type='submit') Create
+                button.btn.btn-success(type='submit') <span class="glyphicon glyphicon-plus-sign"></span> Create
 
 
 
@@ -58,3 +58,5 @@ div.container-fluid
             td {{auction.highest_bidder}}
             td
               button.btn.btn-success.btn-xs(ng-click="startAuction(auction)") Start
+              &nbsp;
+              button.btn.btn-danger.btn-xs Stop
