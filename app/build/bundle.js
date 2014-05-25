@@ -43443,6 +43443,7 @@ appicenter.controller('AuctionAdminCtrl', ['$scope', '$timeout', 'firebaseServic
       name: $scope.new_auction.name,
       duration: $scope.new_auction.duration*60*1000,
       image: $scope.new_auction.image,
+      charity: $scope.new_auction.charity,
       start_time: 0,
       end_time: 0,
       start_price: $scope.new_auction.start_price,
