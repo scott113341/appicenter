@@ -1,4 +1,9 @@
 appicenter.controller('ScoreboardCtrl', ['$scope', 'firebaseService', function($scope, firebaseService) {
-  $scope.scoreboard = firebaseService('/scoreboard');
-  $scope.scoreboard.$bind($scope, 'scoreboard');
+  var scoreboardRef = firebaseService('/scoreboard');
+  scoreboardRef.$bind($scope, 'scoreboard');
+
+
+  var auctionRef = firebaseService('/auctions');
+  auctionRef.$bind($scope, 'auctions');
+
 }]);

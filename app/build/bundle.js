@@ -43322,7 +43322,7 @@ var f=new fb.simplelogin.client(a,b,c,d);return{setApiHost:function(a){fb.simple
 3,c,!1);f.createUser(a,b,c)},changePassword:function(a,b,c,d){fb.simplelogin.util.validation.validateArgCount("FirebaseSimpleLogin.changePassword",4,4,arguments.length);fb.simplelogin.util.validation.validateCallback("FirebaseSimpleLogin.changePassword",4,d,!1);f.changePassword(a,b,c,d)},removeUser:function(a,b,c){fb.simplelogin.util.validation.validateArgCount("FirebaseSimpleLogin.removeUser",3,3,arguments.length);fb.simplelogin.util.validation.validateCallback("FirebaseSimpleLogin.removeUser",3,
 c,!1);f.removeUser(a,b,c)},sendPasswordResetEmail:function(a,b){fb.simplelogin.util.validation.validateArgCount("FirebaseSimpleLogin.sendPasswordResetEmail",2,2,arguments.length);fb.simplelogin.util.validation.validateCallback("FirebaseSimpleLogin.sendPasswordResetEmail",2,b,!1);f.sendPasswordResetEmail(a,b)}}};goog.exportSymbol("FirebaseSimpleLogin",FirebaseSimpleLogin);FirebaseSimpleLogin.onOpen=function(a){fb.simplelogin.client.onOpen(a)};goog.exportProperty(FirebaseSimpleLogin,"onOpen",FirebaseSimpleLogin.onOpen);})();
 
-var appicenter = angular.module('appicenter', ['firebase', 'ngRoute','mgcrea.ngStrap','ngAnimate','angularMoment']);
+var appicenter = angular.module('appicenter', ['firebase', 'ngRoute','mgcrea.ngStrap','ngAnimate','ngAnimate-animate.css','angularMoment']);
 
 appicenter.config(['$routeProvider', function($routeProvider) {
   $routeProvider
@@ -43534,6 +43534,11 @@ appicenter.controller('ScoreboardControllerCtrl', ['$scope', 'firebaseService', 
 }]);
 
 appicenter.controller('ScoreboardCtrl', ['$scope', 'firebaseService', function($scope, firebaseService) {
-  $scope.scoreboard = firebaseService('/scoreboard');
-  $scope.scoreboard.$bind($scope, 'scoreboard');
+  var scoreboardRef = firebaseService('/scoreboard');
+  scoreboardRef.$bind($scope, 'scoreboard');
+
+
+  var auctionRef = firebaseService('/auctions');
+  auctionRef.$bind($scope, 'auctions');
+
 }]);
