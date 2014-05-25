@@ -1,5 +1,10 @@
-appicenter.controller('LoginCtrl', ['$scope', 'loginService', function($scope, loginService) {
+appicenter.controller('LoginCtrl', ['$scope', '$location', 'loginService', function($scope, $location, loginService) {
   $scope.auth = loginService;
+
+  // redirect if logged in
+  if ($scope.auth.user) {
+    $location.path('/');
+  }
 
   $scope.email = 'scott.the.hardy@gmail.com';
   $scope.password = 'a';

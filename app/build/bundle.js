@@ -38692,6 +38692,14 @@ appicenter.config(['$routeProvider', function($routeProvider) {
       templateUrl: 'templates/login.html',
       controller: 'LoginCtrl'
     })
+    .when('/logout', {
+      templateUrl: 'templates/logout.html',
+      controller: 'LogoutCtrl'
+    })
+    .when('/auction', {
+      templateUrl: 'templates/auction.html',
+      controller: 'AuctionCtrl'
+    })
 
 
     .when('/admin/scoreboard', {
@@ -38721,12 +38729,28 @@ appicenter.factory('loginService', ['$firebaseSimpleLogin', function($firebaseSi
   return $firebaseSimpleLogin(ref);
 }]);
 
+appicenter.controller('AuctionCtrl', ['$scope', '$location', 'loginService', function($scope, $location, loginService) {
+  // make sure user is logged in
+  $scope.auth = loginService;
+  $scope.auth.$getCurrentUser().then(function(user) {
+    console.log(user);
+    if (!user) {
+      $location.path('/login');
+    }
+  });
+}]);
+
 appicenter.controller('HomeCtrl', ['$scope', 'loginService', function($scope, loginService) {
   $scope.auth = loginService;
 }]);
 
-appicenter.controller('LoginCtrl', ['$scope', 'loginService', function($scope, loginService) {
+appicenter.controller('LoginCtrl', ['$scope', '$location', 'loginService', function($scope, $location, loginService) {
   $scope.auth = loginService;
+
+  // redirect if logged in
+  if ($scope.auth.user) {
+    $location.path('/');
+  }
 
   $scope.email = 'scott.the.hardy@gmail.com';
   $scope.password = 'a';
@@ -38742,6 +38766,11 @@ appicenter.controller('LoginCtrl', ['$scope', 'loginService', function($scope, l
         console.log(error);
       });
   };
+}]);
+
+appicenter.controller('LogoutCtrl', ['$scope', 'loginService', function($scope, loginService) {
+  $scope.auth = loginService;
+  $scope.auth.$logout();
 }]);
 
 appicenter.controller('ScoreboardControllerCtrl', ['$scope', 'firebaseService', function($scope, firebaseService) {
