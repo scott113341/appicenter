@@ -1,4 +1,4 @@
-appicenter.controller('AuctionCtrl', ['$scope', '$location', '$timeout', 'firebaseService', 'loginService', function($scope, $location, $timeout, firebaseService, loginService) {
+appicenter.controller('AuctionCtrl', ['$scope', '$location', '$timeout', '$route', 'firebaseService', 'loginService', function($scope, $location, $timeout, $route, firebaseService, loginService) {
   // make sure user is logged in
   $scope.auth = loginService;
   $scope.auth.$getCurrentUser().then(function(user) {
@@ -12,6 +12,11 @@ appicenter.controller('AuctionCtrl', ['$scope', '$location', '$timeout', 'fireba
   // get the current auction's id from the scoreboard
   var currentAuctionRef = firebaseService('/scoreboard/current_auction');
   currentAuctionRef.$bind($scope, 'currentAuction').then(function() {
+
+    // reload page if current action id changes
+    currentAuctionRef.$on('change', function() {
+      $route.reload();
+    });
 
     // get the current auction
     var auctionsRef = firebaseService('/auctions');
