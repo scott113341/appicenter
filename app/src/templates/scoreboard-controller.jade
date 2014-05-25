@@ -53,5 +53,5 @@ div.container-fluid
           div.item.dn-fade-up(ng-repeat="(key,media) in photos | orderBy:key")
             div: img(src="{{media.images.thumbnail.url}}",ng-click="$parent.current_photo = media")
             div
-              button.btn.btn-default.btn
-                span yolo
+              button.btn.btn-default.btn yolo
+                span.glyphicon.glyphicon-star
