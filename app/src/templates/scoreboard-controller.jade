@@ -42,8 +42,12 @@ div.container-fluid
       div.row
         h2 Instagram Feed
         div.row.feed
-          div.item.dn-fade-up(ng-repeat="(key,media) in photos | orderBy:key")
-            div: img(src="{{media.images.thumbnail.url}}",ng-click="$parent.current_photo = media")
+          div.item.dn-fade-up(ng-repeat="(key,media) in photos | orderBy:key",ng-class="{selected:$parent.current_photo.id == media.id}")
+            p: img(src="{{media.images.thumbnail.url}}")
             div
-              button.btn.btn-default.btn
-                span yolo
+              p {{media.caption.text}}
+              p {{media.caption.from.username}}
+              button.btn.btn-default.btn(ng-click="$parent.current_photo = media",ng-show="$parent.current_photo.id != media.id")
+                span.glyphicon.glyphicon-star
+                |&nbsp;Set Image
+                
