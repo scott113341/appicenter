@@ -17,39 +17,39 @@ gulp.task('scripts', function() {
       './bower_components/firebase/firebase.js',
       './bower_components/angularfire/angularfire.js',
       './bower_components/firebase-simple-login/firebase-simple-login.js',
-      './dashboard/src/app.js',
-      './dashboard/src/services/*.js',
-      './dashboard/src/controllers/*.js'
+      './app/src/app.js',
+      './app/src/services/*.js',
+      './app/src/controllers/*.js'
     ])
     .pipe(concat('bundle.js'))
-    .pipe(gulp.dest('./dashboard/build/'));
+    .pipe(gulp.dest('./app/build/'));
 });
 
 gulp.task('less', function() {
-  gulp.src('./dashboard/src/style.less')
+  gulp.src('./app/src/style.less')
   	.pipe(less({ compress: true }))
   	.on('error', notify.onError(handleErrors))
     .pipe(prefix('last 2 Chrome versions'))
-  	.pipe(gulp.dest('./dashboard/build/'));
+    .pipe(gulp.dest('./app/build/'));
 });
 
 gulp.task('jade', function() {
-	gulp.src('./dashboard/src/layout.jade')
+	gulp.src('./app/src/layout.jade')
 		.pipe(jade())
 		.on('error', notify.onError(handleErrors))
 		.pipe(rename('index.html'))
-		.pipe(gulp.dest('./dashboard/build/'));
+		.pipe(gulp.dest('./app/build/'));
 
-  gulp.src('./dashboard/src/templates/*.jade')
+  gulp.src('./app/src/templates/*.jade')
     .pipe(jade())
     .on('error', notify.onError(handleErrors))
-    .pipe(gulp.dest('./dashboard/build/templates/'));
+    .pipe(gulp.dest('./app/build/templates/'));
 });
 
 gulp.task('watch', function() {
-  gulp.watch('./dashboard/**/*.js', ['scripts']);
-  gulp.watch('./dashboard/**/*.jade', ['jade']);
-  gulp.watch('./dashboard/**/*.less', ['less']);
+  gulp.watch('./app/**/*.js', ['scripts']);
+  gulp.watch('./app/**/*.jade', ['jade']);
+  gulp.watch('./app/**/*.less', ['less']);
 });
 
 gulp.task('default', ['scripts', 'less', 'jade', 'watch']);
