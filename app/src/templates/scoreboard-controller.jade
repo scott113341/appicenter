@@ -21,7 +21,29 @@ div.container-fluid
       div.panel.panel-default
         div.panel-heading Auction Settings
         div.panel-body
-          p meow
+          table.table.table-hover
+            thead
+              //th Id
+              th Displaying?
+              th Item
+              th In Progress?
+              th Time Remaining
+              th Starting Price
+              th Current Price
+              th Actions
+            tbody
+              tr(ng-repeat="auction in auctions | orderByPriority", ng-class="{success: inProgress(auction)}")
+                //td {{auction.$id}}
+                td {{auction.$id == current_auction | boolean}}
+                td {{auction.name}}
+                td {{inProgress(auction) | boolean}}
+                td {{timeRemaining(auction) | zeroToDash}} sec
+                td ${{auction.start_price}}
+                td ${{auction.current_price}}
+                td
+                  button.btn.btn-primary.btn-xs(ng-click="displayAuction(auction)") Display
+                  button.btn.btn-success.btn-xs(ng-click="startAuction(auction)") Start
+                  button.btn.btn-danger.btn-xs Stop
 
 
 
