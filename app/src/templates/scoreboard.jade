@@ -4,14 +4,32 @@ div.scoreboard
   
   div.content.dn-fade-left-big(ng-show="scoreboard.current_view.id == 'auction'")
     div.block.auction
-      img(ng-src="{{auctions[scoreboard.current_auction].image}}")
+      img(ng-src="{{auction.image}}")
 
   div.details.dn-fade-up(ng-show="scoreboard.current_view.id == 'auction'")
     div
       ul.list-unstyled
-        li: h1 All proceeds benefit {{auctions[scoreboard.current_auction].charity}}
-        li: img(ng-src="{{auctions[scoreboard.current_auction].charity_image}}")
-        li: h1 {{auctions[scoreboard.current_auction].name}}
+        li: h1 All proceeds benefit {{auction.charity}}!
+        li: img(ng-src="{{auction.charity_image}}")
+        li: h1 {{auction.name}}
+
+    div.auctio
+      div.row
+        div(ng-if="status == 0")
+          h3 ${{auction.current_price}} <small>starting bid</small>
+        div(ng-if="status == 1")
+          h3 ${{auction.current_price}} <small>current bid</small>
+        div(ng-if="status == 2")
+          h3 ${{auction.current_price}} <small>winning bid</small>
+      div.row
+        div(ng-if="status == 0")
+          h4.center Bidding is about to begin!
+        div(ng-if="status == 1")
+          div.progress.progress-striped.active
+            div.progress-bar(ng-style="{width: progress.percent}")
+          p.center {{progress.time_remaining}} seconds remaining
+        div(ng-if="status == 2")
+          h4.center Bidding has ended.
 
 
 
