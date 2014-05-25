@@ -43392,7 +43392,7 @@ appicenter.filter("boolean", function() {
   }
 });
 
-appicenter.controller('AuctionCtrl', ['$scope', function($scope) {
+appicenter.controller('AdminCtrl', ['$scope', function($scope) {
 
 }]);
 

@@ -1,3 +1,3 @@
-appicenter.controller('AuctionCtrl', ['$scope', function($scope) {
+appicenter.controller('AdminCtrl', ['$scope', function($scope) {
 
 }]);
